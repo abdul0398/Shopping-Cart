@@ -1,0 +1,33 @@
+<%- layout('/layouts/boilerPlate') %>
+    <h1 class="text-center mb-5"><%=product.name%> </h1>
+<div class="d-flex flex-wrap justify-content-around">
+        <div class="card shadow mb-5 bg-body rounded float" style="width: 18rem">
+            <img src="<%=product.img%>" style="height: 200px; object-fit: cover" class="card-img-top"
+                alt="<%=product.name%>" />
+            <div class="card-body">
+                <h5 class="card-title">
+                    <%=product.name%>
+                </h5>
+                <p class="card-text">
+                    <%=product.desc%>
+                </p>
+                <p class="card-text">
+                    <%=product.price%>$
+                </p>
+                <a href="/products" class="btn btn-success btn-sm mb-1">Buy Now</a>
+                <a href="#" class="btn btn-secondary btn-sm mb-1">Add to cart</a>
+                <a href="/products/<%=product._id%>/edit" class="btn btn-primary btn-sm mb-1">Edit</a>
+                <a href="/delete/<%=product._id%>" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        </div>
+        <div class="w-25 d-flex flex-column">
+            <h1 class="mb-5">Leave your review</h1>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="name" />
+            <label for="rating">Rating</label>
+            <input type="range" name="rating" id="rating" placeholder="" />
+            <label for="review">Review</label>
+            <textarea type="text" name="review" id="review" placeholder="Write something about the product" cols="10"
+                rows="3"></textarea>
+        </div>
+</div>

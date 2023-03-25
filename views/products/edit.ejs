@@ -1,0 +1,23 @@
+<%- layout('/layouts/boilerPlate') %>
+<div class="formDiv">
+  <h1 class="mb-5 text-center">EDIT PRODUCT</h1>
+  <form action="/products/<%=product.id%>/edit" method="post">
+    <div class="form-group">
+      <label for="name">Product name</label>
+      <input type="text" class="form-control"  value="<%=product.name%>" id="name" name="name" placeholder="Enter product name" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" class="form-control" value="<%=product.price%>" name="price" id="price" placeholder="Price in $" required>
+    </div>
+    <div class="form-group">
+      <label for="img">Image</label>
+      <input type="text" class="form-control" value="<%=product.img%>" name="img" id="img" placeholder="Image url" required>
+    </div>
+    <div class="form-group">
+      <label for="desc">Description</label>
+      <textarea type="number" class="form-control" name="desc" id="desc" placeholder="Write product description" required><%=product.desc%></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+  </form>
+</div>

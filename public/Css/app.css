@@ -1,0 +1,13 @@
+.margintop{
+    margin-top: 5rem;
+}
+.formDiv{
+    width: 400px;
+    margin: auto;
+}
+.float{
+    transition: 0.5s;
+}
+.float:hover{
+    transform: scale(1.05);
+}
