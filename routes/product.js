@@ -15,15 +15,15 @@ router.post('/products/new', async (req,res)=>{
 })
 router.get('/products/:id',async (req,res)=>{
     const id = req.params.id;
-    const product = await Product.findById(id);
-    res.render("products/showProduct", {product});
+    const product = await Product.findById(id).populate("reviews");// populate method replace the review id's in product schema to actual reviews
+    res.render("products/showProduct", {product:product,reviews:product.reviews});
 })
 router.get('/products/:id/edit', async (req,res)=>{
     const id = req.params.id;
     const product = await Product.findById(id);
     res.render('products/edit',{product});
 })
-router.post('/products/:id/edit', async (req,res)=>{
+router.patch('/products/:id/edit', async (req,res)=>{
     const id = req.params.id;
     const update = {
         name:req.body.name,
@@ -31,14 +31,13 @@ router.post('/products/:id/edit', async (req,res)=>{
         price:req.body.price,
         desc:req.body.desc,
     }
-    const product = await Product.findOneAndUpdate({_id:id},update,{new:true});
-    res.render("products/showproduct",{product});
+    const product = await Product.findOneAndUpdate({_id:id},update,{new:true}).populate("reviews");
+    res.render("products/showproduct",{product:product,reviews:product.reviews});
 })
-// router.get('/delete/:id', async (req,res)=>{
-//     const id = req.params.id;
-//     console.log(id);
-//     // await Product.findByIdAndDelete(id);
-//     // res.redirect('/products');
-// })
+router.delete('/delete/:id', async (req,res)=>{
+    const id = req.params.id;
+    await Product.findByIdAndDelete(id);
+    res.redirect('/products');
+})
 
 module.exports = router;

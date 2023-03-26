@@ -17,17 +17,53 @@
                 <a href="/products" class="btn btn-success btn-sm mb-1">Buy Now</a>
                 <a href="#" class="btn btn-secondary btn-sm mb-1">Add to cart</a>
                 <a href="/products/<%=product._id%>/edit" class="btn btn-primary btn-sm mb-1">Edit</a>
-                <a href="/delete/<%=product._id%>" class="btn btn-danger btn-sm">Delete</a>
+                <form action="/delete/<%=product._id%>?_method=delete" method="post"><!--_method=delete override the post method to delete-->
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+                
             </div>
         </div>
-        <div class="w-25 d-flex flex-column">
-            <h1 class="mb-5">Leave your review</h1>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="name" />
-            <label for="rating">Rating</label>
-            <input type="range" name="rating" id="rating" placeholder="" />
-            <label for="review">Review</label>
-            <textarea type="text" name="review" id="review" placeholder="Write something about the product" cols="10"
-                rows="3"></textarea>
-        </div>
+        <form action="/products/<%=product._id%>/review" method="post">
+            <div class="w-30 d-flex flex-column border shadow rounded-3 mt-5 p-3" style="height: fit-content;">
+                <h1 class="mb-5">Leave your Review</h1>
+                <input type="text" name="name" id="name" class="rounded border border-1" placeholder="name" />
+                <fieldset class="starability-basic">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                  </fieldset>
+                <textarea type="text" name="comment" id="review"  class="rounded border border-1" placeholder="Write something about the product" cols="10"
+                    rows="3"></textarea>
+                    <button type="submit" class="btn btn-success w-25 mt-3"> Submit</button>
+            </div>
+                
+        </form>
+</div>
+<div class="w-auto mx-auto">
+    <h1 class="text-center"> Reviews</h1>
+    <div class="d-flex flex-wrap">
+        <%for(let i = 0; i < reviews.length; i++){%>    
+            <div class="card me-2" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%=reviews[i].name%></h5>
+                  <p class="text-muted"><%=reviews[i].createdAt.toDateString()%></p>
+                  <%for(let j = 0; j < reviews[i].rating; j++){%>
+                        <span class="fa fa-star checked"></span>
+                  <%}%>
+                  <%for(let j = 0; j < 5 - reviews[i].rating; j++){%>
+                    <span class="fa fa-star"></span>
+                    <%}%>
+                  <p class="card-text"><%=reviews[i].comment%></p>
+                </div>
+              </div>
+        <%}%>
+     </div>    
 </div>

@@ -11,3 +11,9 @@
 .float:hover{
     transform: scale(1.05);
 }
+.nav{
+    border-bottom: 1px solid black;
+}
+.checked{
+    color: rgb(194, 194, 0);
+}
