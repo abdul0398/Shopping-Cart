@@ -1,7 +1,7 @@
 <%- layout('/layouts/boilerPlate') %>
 <div class="formDiv">
   <h1 class="mb-5 text-center">ADD NEW PRODUCT</h1>
-  <form action="/products/new" method="post">
+  <form action="/products/new" class="needs-validation" method="post" novalidate>
     <div class="form-group">
       <label for="name">Product name</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" required>

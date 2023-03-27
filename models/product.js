@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./review");
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -29,5 +30,23 @@ const productSchema = new mongoose.Schema({
   //     review:String
   // }]
 });
+
+
+// middleware function runs before findByIdAndDelete & next will points to next function that needs to be run
+// productSchema.pre('findOneAndDelete', function(next){
+//   console.log("pre middle ware starts")
+//   next();
+// })
+
+// middlewares are written before model compiling
+// post middleware function runs after findByIdAndDelete
+productSchema.post('findOneAndDelete', function(product){
+  console.log("pre middle ware starts")// product is the deleted product item
+  if(product.reviews.length > 0){ 
+    Review.deleteMany({_id:{$in:product.reviews}});// $in takes array as a field, in will choose id one by one from array and match with _id and delete
+  }
+})
+
+
 Product = mongoose.model("Product", productSchema);
 module.exports = Product;

@@ -1,7 +1,7 @@
 <%- layout('/layouts/boilerPlate') %>
 <div class="formDiv">
   <h1 class="mb-5 text-center">EDIT PRODUCT</h1>
-  <form action="/products/<%=product.id%>/edit?_method=patch" method="post">
+  <form action="/products/<%=product.id%>/edit?_method=patch" class="needs-validation" method="post" novalidate>
     <div class="form-group">
       <label for="name">Product name</label>
       <input type="text" class="form-control"  value="<%=product.name%>" id="name" name="name" placeholder="Enter product name" required>
