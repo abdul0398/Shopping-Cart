@@ -15,7 +15,8 @@ module.exports.reviewValidateFunction = (req, res, next)=>{// middleware functio
     const{error} = reviewSchema.validate({name, comment, rating});
     if(error){
         const msg = error.details.map(err=>err.message).join(',');// Joining all the error messages in an array
-        res.render('products/error',{err:msg});
+        req.flash('fail', 'msg!');
+        res.render(`products/error`,{err:msg});
     }else{
         next();// if error is not found then run the next() function i.e insert data into database
     }

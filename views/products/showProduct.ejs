@@ -1,5 +1,5 @@
 <%- layout('/layouts/boilerPlate') %>
-    <h1 class="text-center mb-5"><%=product.name%> </h1>
+    <%- include('../partials/flash') %>
 <div class="d-flex flex-wrap justify-content-around">
         <div class="card shadow mb-5 bg-body rounded float" style="width: 18rem">
             <img src="<%=product.img%>" style="height: 200px; object-fit: cover" class="card-img-top"
@@ -20,10 +20,10 @@
                 <form action="/delete/<%=product._id%>?_method=delete" method="post"><!--_method=delete override the post method to delete-->
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                 </form>
-                
             </div>
         </div>
         <form action="/products/<%=product._id%>/review" method="post">
+       
             <div class="w-30 d-flex flex-column border shadow rounded-3 mt-5 p-3" style="height: fit-content;">
                 <h1 class="mb-5">Leave your Review</h1>
                 <input type="text" name="name" id="name" class="rounded border border-1" placeholder="name" />
@@ -47,11 +47,11 @@
                 
         </form>
 </div>
-<div class="w-auto mx-auto">
+<div class="w-auto mx-auto my-3">
     <h1 class="text-center"> Reviews</h1>
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap justify-content-around">
         <%for(let i = 0; i < reviews.length; i++){%>    
-            <div class="card me-2" style="width: 18rem;">
+            <div class="card me-2" style="width: 16rem;">
                 <div class="card-body">
                   <h5 class="card-title"><%=reviews[i].name%></h5>
                   <p class="text-muted"><%=reviews[i].createdAt.toDateString()%></p>

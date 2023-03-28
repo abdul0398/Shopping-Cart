@@ -11,7 +11,8 @@ route.post("/products/:id/review",reviewValidateFunction, async (req,res)=>{
         const product = await Product.findById(id);
         product.reviews.push(review);// mongoose automatically save review id from review
         product.save();
-        res.redirect(`/products/${id}`);
+        req.flash('success', 'Review added successfully!')// adding flash messages before redirecting
+        res.redirect(`/products/${id}`);// before this line middleware of flash msg runs
     } catch (error) {
         res.render('products/error', {err:error.message});
     } 
