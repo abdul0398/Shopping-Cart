@@ -3,6 +3,9 @@ const app  = express();
 const mongoose = require("mongoose");
 const path = require("path");// to use (__dirname)
 const ejsMate = require("ejs-mate");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 //const seedDb = require("./seed");
 const methodOverride = require("method-override");
 const session = require('express-session')
@@ -23,15 +26,40 @@ const sessionConfig = {
     secret: 'randomSecret',
     resave: false,
     saveUninitialized: true,
-  }
+}
+
 
 app.use(session(sessionConfig));
 app.use(flash());
 
+
+// initializing middleware for passport
+app.use(passport.session());
+app.use(passport.initialize());
+
+
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//       User.findOne({ username: username }, function (err, user) {
+//         if (err) { return done(err); }
+//         if (!user) { return done(null, false); }
+//         if (!user.verifyPassword(password)) { return done(null, false); }
+//         return done(null, user);
+//       });
+//     }
+//   ));
+
+// basically check the username and password and match with data base;
+passport.use(new LocalStrategy(User.authenticate())); //this will do the work for the above code and it is provided by passport-local-mongoose
+passport.serializeUser(User.serializeUser());// Add the user.id into session corresponds to user;
+passport.deserializeUser(User.deserializeUser())// remove the user.id from the session;
+
+
 // by using res.local we can set the variables that are available on all templates of view folder, so we dont need to repeat
 app.use((req,res,next)=>{
+    res.locals.currentUser = req.user;// making the user available to all the templates 
     res.locals.success = req.flash("success");
-    res.locals.fail = req.flash("Error");
+    res.locals.error = req.flash("error");
     next();
 });
 
@@ -40,6 +68,9 @@ const ProductRoutes = require('./routes/product'); // importing default routes o
 app.use(ProductRoutes);
 const reviewRoutes = require('./routes/review');
 app.use(reviewRoutes);
+const userRoutes = require('./routes/auth');
+app.use(userRoutes);
+
 app.listen(3000, ()=>{
     console.log("Server running at port 3000");
 })

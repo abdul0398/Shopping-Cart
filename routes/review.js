@@ -2,8 +2,8 @@ const express = require("express");
 const route = express.Router();
 const Review = require("../models/review");
 const Product = require("../models/product");
-const {reviewValidateFunction} = require('../validationMiddleware');// server side validation using the middleware
-route.post("/products/:id/review",reviewValidateFunction, async (req,res)=>{
+const {reviewValidateFunction, isLoggedin} = require('../validationMiddleware');// server side validation using the middleware
+route.post("/products/:id/review",reviewValidateFunction, isLoggedin, async (req,res)=>{
     try {
         const id = req.params.id;
         // console.log(req.body.comment);

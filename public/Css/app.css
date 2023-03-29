@@ -2,7 +2,6 @@
     margin-top: 5rem;
 }
 body{
-    height: 100%;
     width: 100%;
     position: relative;
 }
@@ -22,7 +21,14 @@ body{
 .background-color{
     background-color: #7785AC;
 }
-.footer{
+/* .footer{
     position: absolute;
     width: 100%;
+    bottom:0;
+} */
+.parent{
+    min-height: 100vh;
+}
+input[type=text] input[type=password] {
+    min-width: 200px;
 }

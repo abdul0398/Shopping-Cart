@@ -1,32 +1,32 @@
 const express = require("express");
-const { productValidateFunction } = require("../validationMiddleware");
+const { productValidateFunction, isLoggedin } = require("../validationMiddleware");
 const router = express.Router();
 const Product = require("../models/product");
 router.get("/products", async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.render("products/index", { products });
-  } catch (error) {
-    res.render("products/error", { err: error.message });
-  }
+    try {
+      const products = await Product.find();
+      res.render("products/index", { products });
+    } catch (error) {
+      res.render("products/error", { err: error.message });
+    }
 });
-router.get("/products/new", (req, res) => {
-  try {
-    res.render("products/newProduct");
-  } catch (error) {
-    res.render("products/error", { err: error.message });
-  }
+router.get("/products/new", isLoggedin, (req, res) => {
+    try {
+      res.render("products/newProduct");
+    } catch (error) {
+      res.render("products/error", { err: error.message });
+    }
 });
 // validateproduct is middleware runs before this function do the validation;
 router.post("/products/new", productValidateFunction, async (req, res) => {
-  try {
-    const { name, img, desc, price } = req.body;
-    await Product.create({ name, img, desc, price });
-    req.flash("success", "Product added Successfully");
-    res.redirect("/products");
-  } catch (error) {
-    res.render("products/error", { err: error.message });
-  }
+      try {
+        const { name, img, desc, price } = req.body;
+        await Product.create({ name, img, desc, price });
+        req.flash("success", "Product added Successfully");
+        res.redirect("/products");
+      } catch (error) {
+        res.render("products/error", { err: error.message });
+    }
 });
 router.get("/products/:id", async (req, res) => {
   try {
@@ -37,7 +37,7 @@ router.get("/products/:id", async (req, res) => {
     res.render("products/error", { err: error.message });
   }
 });
-router.get("/products/:id/edit", async (req, res) => {
+router.get("/products/:id/edit", isLoggedin, async (req, res) => {
   try {
     const id = req.params.id;
     const product = await Product.findById(id);
@@ -50,6 +50,7 @@ router.get("/products/:id/edit", async (req, res) => {
 router.patch(
   "/products/:id/edit",
   productValidateFunction,
+  isLoggedin,
   async (req, res) => {
     try {
       const id = req.params.id;
@@ -70,7 +71,7 @@ router.patch(
   }
 );
 // deleting the product
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id",isLoggedin, async (req, res) => {
   try {
     const id = req.params.id;
     //const product = await Product.findById(id);

@@ -1,6 +1,7 @@
 <%- layout('/layouts/boilerPlate') %>
-    <%- include('../partials/flash') %>
-<div class="d-flex flex-wrap justify-content-around">
+<%- include('../partials/flash') %>
+<div class="parent">
+    <div class="d-flex flex-wrap justify-content-around">
         <div class="card shadow mb-5 bg-body rounded float" style="width: 18rem">
             <img src="<%=product.img%>" style="height: 200px; object-fit: cover" class="card-img-top"
                 alt="<%=product.name%>" />
@@ -67,3 +68,6 @@
         <%}%>
      </div>    
 </div>
+</div>
+
+

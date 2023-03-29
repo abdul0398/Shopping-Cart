@@ -10,6 +10,13 @@ module.exports.productValidateFunction = (req, res, next)=>{// middleware functi
         next();// if error is not found then run the next() function i.e insert data into database
     }
 }
+module.exports.isLoggedin = (req,res,next)=>{
+    if(!req.isAuthenticated()){
+        req.flash("error", " Login First");
+        return res.render('auth/login');
+    }
+      next();
+}
 module.exports.reviewValidateFunction = (req, res, next)=>{// middleware function to validate new Product form
     const{name, comment, rating} = req.body;
     const{error} = reviewSchema.validate({name, comment, rating});

@@ -1,0 +1,20 @@
+<%- layout('/layouts/boilerPlate') %>
+<%- include('../partials/flash') %>
+<div class="parent">
+  <div class="w-25 mx-auto">
+    <h1 class="display-6 text-center">Log in</h1>
+    <form action="/login" method="post">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control inputMinWidth" name="username" id="exampleInputEmail1" >
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">log in</button>
+      </form>
+</div>
+
+</div>
+

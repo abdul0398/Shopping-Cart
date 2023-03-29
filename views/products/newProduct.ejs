@@ -1,7 +1,8 @@
 <%- layout('/layouts/boilerPlate') %>
-<div class="formDiv">
+<%- include('../partials/flash') %>
+<div class="parent">
   <h1 class="mb-5 text-center">ADD NEW PRODUCT</h1>
-  <form action="/products/new" class="needs-validation" method="post" novalidate>
+  <form action="/products/new" class="needs-validation w-50 mx-auto" method="post" novalidate>
     <div class="form-group">
       <label for="name">Product name</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" required>
