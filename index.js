@@ -26,6 +26,10 @@ const sessionConfig = {
     secret: 'randomSecret',
     resave: false,
     saveUninitialized: true,
+    cookie:{
+        httpOnly:true,// so that no one can use script and use session id(by default it is already true)
+        maxAge:(7 * 24 * 60 * 60 * 1000)// expires in 1 week
+    }
 }
 
 
@@ -35,7 +39,7 @@ app.use(flash());
 
 // initializing middleware for passport
 app.use(passport.session());
-app.use(passport.initialize());
+app.use(passport.authenticate('session'));
 
 
 // passport.use(new LocalStrategy(

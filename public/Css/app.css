@@ -4,6 +4,7 @@
 body{
     width: 100%;
     position: relative;
+    overflow-x: hidden;
 }
 .formDiv{
     width: 400px;
@@ -27,7 +28,7 @@ body{
     bottom:0;
 } */
 .parent{
-    min-height: 100vh;
+    min-height: 75vh;
 }
 input[type=text] input[type=password] {
     min-width: 200px;

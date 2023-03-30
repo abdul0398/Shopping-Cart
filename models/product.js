@@ -17,6 +17,10 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
   desc: String,
+  author:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+  },
   reviews: [
     {
       // can't directly set ObjectId as it is not a generic type in js
@@ -24,6 +28,7 @@ const productSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
+  
   // reviews:[{ // we do like this in case of one to few relationship
   //     name:String,
   //     rating:Number,

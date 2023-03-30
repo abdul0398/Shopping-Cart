@@ -3,7 +3,7 @@ const route = express.Router();
 const Review = require("../models/review");
 const Product = require("../models/product");
 const {reviewValidateFunction, isLoggedin} = require('../validationMiddleware');// server side validation using the middleware
-route.post("/products/:id/review",reviewValidateFunction, isLoggedin, async (req,res)=>{
+route.post("/products/:id/review", isLoggedin, reviewValidateFunction, async (req,res)=>{
     try {
         const id = req.params.id;
         // console.log(req.body.comment);
@@ -15,6 +15,6 @@ route.post("/products/:id/review",reviewValidateFunction, isLoggedin, async (req
         res.redirect(`/products/${id}`);// before this line middleware of flash msg runs
     } catch (error) {
         res.render('products/error', {err:error.message});
-    } 
+    }
 })
 module.exports = route;
