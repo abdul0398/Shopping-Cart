@@ -7,6 +7,7 @@ router.get("/register", async (req, res) => {
   res.render("auth/register");
 });
 router.post("/register", async (req, res) => {
+  const wishlist = [];
   try {
     const {username, name, password, role} = req.body;
     const user = new User({username, name, role});// role will tell if the registering user is buyer or seller 

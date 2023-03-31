@@ -1,20 +1,36 @@
-<%- layout('/layouts/boilerPlate') %>
-<%- include('../partials/flash') %>
-<div class="parent">
-    <div class="row">
-        <%for(let product of products){%>
-            <div class="col-lg-3 flex-wrap d-flex justify-content-center">
-                <div class="card shadow  mb-5 bg-body rounded float" style="width: 18rem;">
-                    <img src="<%=product.img%>" style = "height: 200px; object-fit: cover;"  class="card-img-top" alt="<%=product.name%>">
-                    <div class="card-body">
-                      <h5 class="card-title"><%=product.name%></h5>
-                      <p class="card-text"><%=product.desc.substring(0,80)%>...</p>
-                      <p class="card-text"><%=product.price%>$</p>
-                      <a href="/products/<%=product._id%>" class="btn btn-primary pos">Buy Now</a>
+<%- layout('/layouts/boilerPlate') %> <%- include('../partials/flash') %>
+        <div class="parent">
+            <div class="row">
+                <%for(let product of products){%>
+                    <div class="col-lg-3 flex-wrap d-flex justify-content-center">
+                        <div class="card shadow mb-5 bg-body rounded float" style="width: 18rem">
+                            <img src="<%=product.img%>" style="height: 200px; object-fit: cover" class="card-img-top"
+                                alt="<%=product.name%>" />
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between">
+                                    <span>
+                                        <%=product.name%>
+                                    </span>
+                                    <span class="btn heart" product-id="<%=product._id%>">
+                                        <%if(!currentUser || !currentUser.wishList.includes(product.id)){%><!-- if current user doesnt liked the product-->
+                                            <i class="far fa-heart"></i><!--hollow heart-->
+                                        <% }else{ %>
+                                            <i class="fas fa-heart"></i>
+                                            <% } %>
+                                    </span>
+                                </h5>
+                                <p class="card-text">
+                                    <%=product.desc.substring(0,80)%>...
+                                </p>
+                                <p class="card-text">
+                                    <%=product.price%>$
+                                </p>
+                                <a href="/products/<%=product._id%>" class="btn btn-primary pos">Buy Now</a>
+                                <a href="/products/<%=product._id%>" class="btn btn-primary pos">Add to Cart</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <%}%>
             </div>
-        <%}%>
-    </div>
-
-</div>
+            <script src="/js/common.js"></script>
+        </div>

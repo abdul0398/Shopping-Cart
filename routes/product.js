@@ -43,7 +43,6 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 router.get("/products/:id/edit", isLoggedin, async (req, res) => {
-  
   try {
     const id = req.params.id;
     const product = await Product.findById(id);

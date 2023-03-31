@@ -1,0 +1,12 @@
+<%- layout('/layouts/boilerPlate') %>
+<%- include('../partials/flash') %>
+<h1 class="text-center"> Cart </h1>
+<ul>
+    <% for(let product of user.cart) {%>
+        <li>
+            <img src=<%=product.img%> alt="product">
+            <strong><%=product.name%></strong>
+            <strong><%=product.price%></strong>
+        </li>
+    <%}%>
+</ul>

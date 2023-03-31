@@ -23,7 +23,15 @@ module.exports.reviewValidateFunction = (req, res, next)=>{// middleware functio
     }
 }
 module.exports.isLoggedin = (req, res, next)=>{
-    req.session.returnUrl = req.originalUrl;
+// to check if it is an AJAX request we use req.xhr if it is true then it is AJAX req
+    if(req.xhr && !req.isAuthenticated()){// to check Ajax request of like button
+        if(req.session.returnUrl){
+            delete req.session.returnUrl;
+        }
+        req.flash('error', 'Please login first');
+        return res.status(401).json({msg:"You need to lgin first"});
+    }
+    req.session.returnUrl = req.originalUrl;// capturing the prev url from that we come her
     if(!req.isAuthenticated()){
         req.flash("error", "You need to login First");
         return res.redirect('/login');
@@ -39,7 +47,6 @@ module.exports.isSeller = (req, res, next)=>{
 }
 module.exports.isValidAuthor = async (req, res, next)=>{
     const {id} = req.params;
-
     const product = await Product.findById(id).populate("author");
     if(req.user && req.user._id.equals(product.author._id)){
         return next();

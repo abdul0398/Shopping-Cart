@@ -74,6 +74,11 @@ const reviewRoutes = require('./routes/review');
 app.use(reviewRoutes);
 const userRoutes = require('./routes/auth');
 app.use(userRoutes);
+const productapi = require('./routes/api/productapi');
+app.use(productapi);
+const cartRoute = require('./routes/cartRoute');
+app.use(cartRoute);
+
 
 app.listen(3000, ()=>{
     console.log("Server running at port 3000");
