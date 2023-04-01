@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app  = express();
 const mongoose = require("mongoose");
@@ -11,7 +12,7 @@ const methodOverride = require("method-override");
 const session = require('express-session')
 const flash = require('connect-flash');// to show the flash messages based on express-session
 
-mongoose.connect('mongodb://127.0.0.1:27017/ecommerce').then(()=>{
+mongoose.connect(process.env.url).then(()=>{
     console.log("Successfully Db started")
 });
 
@@ -21,9 +22,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));// this will override the request ex- post to patch in the html form
-
 const sessionConfig = {
-    secret: 'randomSecret',
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: true,
     cookie:{
@@ -31,7 +31,6 @@ const sessionConfig = {
         maxAge:(7 * 24 * 60 * 60 * 1000)// expires in 1 week
     }
 }
-
 
 app.use(session(sessionConfig));
 app.use(flash());

@@ -1,36 +1,44 @@
-<%- layout('/layouts/boilerPlate') %> <%- include('../partials/flash') %>
-        <div class="parent">
-            <div class="row">
-                <%for(let product of products){%>
-                    <div class="col-lg-3 flex-wrap d-flex justify-content-center">
-                        <div class="card shadow mb-5 bg-body rounded float" style="width: 18rem">
-                            <img src="<%=product.img%>" style="height: 200px; object-fit: cover" class="card-img-top"
-                                alt="<%=product.name%>" />
-                            <div class="card-body">
-                                <h5 class="card-title d-flex justify-content-between">
-                                    <span>
-                                        <%=product.name%>
-                                    </span>
-                                    <span class="btn heart" product-id="<%=product._id%>">
-                                        <%if(!currentUser || !currentUser.wishList.includes(product.id)){%><!-- if current user doesnt liked the product-->
-                                            <i class="far fa-heart"></i><!--hollow heart-->
-                                        <% }else{ %>
-                                            <i class="fas fa-heart"></i>
-                                            <% } %>
-                                    </span>
-                                </h5>
-                                <p class="card-text">
-                                    <%=product.desc.substring(0,80)%>...
-                                </p>
-                                <p class="card-text">
-                                    <%=product.price%>$
-                                </p>
-                                <a href="/products/<%=product._id%>" class="btn btn-primary pos">Buy Now</a>
-                                <a href="/products/<%=product._id%>" class="btn btn-primary pos">Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <%}%>
-            </div>
-            <script src="/js/common.js"></script>
-        </div>
+<% layout('layouts/boilerplate') -%>
+
+<section class="container">
+
+
+  <%- include('../partials/flash')  %> 
+  
+  <section id="heading"> 
+    <h4 class="display-4"><i class="fab fa-shopify" style="margin-right: 20px;"></i>Shopping-Cart</h4>
+  </section>
+  <div class="row products">
+      <%for(let product of products){%>
+          <div class="col-lg-4 col-md-6 mb-3">
+              <div class="card  mx-auto position-relative" style="width: 20rem;">
+                  <img src="<%=product.img%>" class="card-img-top" alt="item image">
+                  <span class="badge rounded-pill bg-light text-dark w-25 position-absolute translate-middle-y" style="top:41%;left:5%"><%=product.avgRating%>  &star; | <%=product.reviews.length%></span>
+                  <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-between align-items-center">
+                      <span><%= product.name %></span>
+                      <span class="btn like-button bg-light rounded-circle" product-id="<%=product._id%>" style="box-shadow:0px 1px 1px rgba(0,0,0,0.26)">
+                        <% if(currentUser && currentUser.wishList.includes(product._id)){ %> 
+                            <i class="fas fa-heart"></i>
+                        <% }else {%>
+                            <i class="far fa-heart"></i>
+                        <% } %>  
+                      </span>
+                    </h5>
+                    <p class="card-text fw-light"><%= product.desc.substring(0, Math.min(100, product.desc.length))%>...</p>
+                    <% if(product.reviews.length){ %>
+                      <p class="text-muted"><%=product.reviews.length%> reviews</p>
+                    <%}else{%>
+                      <p class="text-muted">No reviews</p>
+                    <% } %> 
+                    <h6 class="card-title"><span class="fw-lighter fs-6 text-decoration-line-through">Rs.<%= product.price*2 %></span> Rs.<%= product.price %> <span class="fw-light fs-6 text-warning">( 50 % OFF )</span> </h6>
+                    <a href="/products/<%=product._id%>" class="btn btn-sm show-btn">Buy Now</a>
+                  </div>
+              </div>
+          </div>
+      <%}%>
+  </div>
+</section>
+
+
+<script src="/js/common.js"></script>

@@ -2,6 +2,13 @@ const express = require("express");
 const { productValidateFunction, isLoggedin, isValidAuthor, isSeller } = require("../validationMiddleware");
 const router = express.Router();
 const Product = require("../models/product");
+router.get("/", async (req, res) => {
+  try {
+    res.render("home");
+  } catch (error) {
+    res.render("products/error", { err: error.message });
+  }
+});
 router.get("/products", async (req, res) => {
     try {
       const products = await Product.find();

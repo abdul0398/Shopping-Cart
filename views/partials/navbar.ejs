@@ -1,39 +1,37 @@
-<nav class="navbar fixed-top navbar-expand-lg background-color navbar-light pb-3">
-    <div class="container-fluid">
-      <a class="navbar-brand text-white" href="/products"><strong>JustCart</strong> </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav w-100 me-auto mb-2 mb-lg-0">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0077b6;">
+  <div class="container">
+    <a class="navbar-brand" href="/products"><i class="fas fa-shopping-basket" style="margin-right: 10px;font-size: 1.7rem;"></i>Shopping Cart</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/products">Products</a>
+        </li>
+        <% if(currentUser && currentUser.role ==='seller'){ %>
           <li class="nav-item">
-            <a class="nav-link active text-white fw-light" aria-current="page" href="/products">Home</a>
+            <a class="nav-link" href="/products/new" tabindex="-1" aria-disabled="true">New</a>
           </li>
-          <% if(currentUser && currentUser.role == "seller") {%>
-          <li class="nav-item">
-            <a class="nav-link text-white fw-light" href="/products/new">New Product</a>
-          </li>
-          <% } %>
-          <% if(currentUser) {%>
-            <li class="nav-item ms-auto">
-              <a class="nav-link text-white text-capitilize fw-light" href="#">Hello <%=currentUser.name%></a>
-            </li>
-            <li class="nav-item ms-4">
-              <a href="/user/cart"><img src="/images/cart.png" style="width: w-50; height: 35px;" alt=""></a>
-            </li>
-            <li class="nav-item ms-3">
-              <a class="nav-link text-white fw-light" href="/logout">Logout</a>
-            </li>
-          <% } %>
-          <% if(!currentUser) {%>
-            <li class="nav-item ms-auto">
-              <a class="nav-link text-white" href="/login">Log in</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/register">Sign Up</a>
-            </li>
-          <% } %>
-        </ul>
+        <% } %> 
+       
+      </ul>
+      <div class="navbar-nav ml-auto">
+
+          <%if(!currentUser){%>
+            <a href="/login" class="nav-link">Login</a>
+          <%}else{%>
+            <a href="/user/myorders" class="nav-link text-capitalize">Hello <%= currentUser.name %> </a>
+            <a href="/user/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> 
+              <sup><span class="badge bg-danger"><%=currentUser.cart.length%></span></sup> 
+            </a>
+            <a href="/logout" class="nav-link">Logout</a>
+          <%}%>
       </div>
+      
     </div>
-  </nav>
+  </div>
+</nav>

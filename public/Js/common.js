@@ -1,5 +1,5 @@
 console.log('Connected');
-const likeButtons = document.getElementsByClassName("heart");
+const likeButtons = document.getElementsByClassName("like-button");
 for(let item of likeButtons){
     item.addEventListener('click',async ()=>{
             product_id = item.getAttribute("product-id");

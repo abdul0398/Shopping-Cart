@@ -14,6 +14,7 @@ route.post("/products/:id/review", isLoggedin, reviewValidateFunction, async (re
         req.flash('success', 'Review added successfully!')// adding flash messages before redirecting
         res.redirect(`/products/${id}`);// before this line middleware of flash msg runs
     } catch (error) {
+        console.log("route");
         res.render('products/error', {err:error.message});
     }
 })

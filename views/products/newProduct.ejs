@@ -1,24 +1,43 @@
-<%- layout('/layouts/boilerPlate') %>
-<%- include('../partials/flash') %>
-<div class="parent">
-  <h1 class="mb-5 text-center">ADD NEW PRODUCT</h1>
-  <form action="/products/new" class="needs-validation w-50 mx-auto" method="post" novalidate>
-    <div class="form-group">
-      <label for="name">Product name</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" required>
+<% layout('layouts/boilerplate') -%>
+
+
+<div class="row">
+    <div class="col-md-6 mx-auto mb-5">
+        <form action="/products/new" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="name">Name : </label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Product Name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Image URL</label>
+                <input class="form-control" type="text" name="img" id="img" placeholder="Product Image URL" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="text" name="price" class="form-control" placeholder="Price" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                </div>  
+            </div>
+        
+            <div class="mb-3">
+                <label class="form-label" for="desc">Description</label>
+                <textarea class="form-control" name="desc" id="desc" rows="5" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success">Add</button>
+        </form>
     </div>
-    <div class="form-group">
-      <label for="price">Price</label>
-      <input type="number" class="form-control" name="price" id="price" placeholder="Price in $" required>
-    </div>
-    <div class="form-group">
-      <label for="img">Image</label>
-      <input type="text" class="form-control" name="img" id="img" placeholder="Image url" required>
-    </div>
-    <div class="form-group">
-      <label for="desc">Description</label>
-      <textarea type="number" class="form-control" name="desc" id="desc" placeholder="Write product description" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Add</button>
-  </form>
 </div>
