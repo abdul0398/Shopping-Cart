@@ -24,6 +24,7 @@
           <%if(!currentUser){%>
             <a href="/login" class="nav-link">Login</a>
           <%}else{%>
+            <a href="/order/myorders" class="nav-link">My Orders</a>
             <a href="/user/myorders" class="nav-link text-capitalize">Hello <%= currentUser.name %> </a>
             <a href="/user/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> 
               <sup><span class="badge bg-danger"><%=currentUser.cart.length%></span></sup> 

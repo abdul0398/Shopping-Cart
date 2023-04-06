@@ -10,9 +10,12 @@ const User = require('./models/user');
 //const seedDb = require("./seed");
 const methodOverride = require("method-override");
 const session = require('express-session')
+const MongoStore = require('connect-mongo');// used to store session on mongoDb instead of program storage because it is limited
 const flash = require('connect-flash');// to show the flash messages based on express-session
 
-mongoose.connect(process.env.url).then(()=>{
+const dbUrl = process.env.url || "mongodb://127.0.0.1:27017/ecommerce";
+
+mongoose.connect(dbUrl).then(()=>{
     console.log("Successfully Db started")
 });
 
@@ -23,13 +26,18 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(methodOverride("_method"));// this will override the request ex- post to patch in the html form
 const sessionConfig = {
-    secret: process.env.secret,
+    secret: process.env.secret || "RANDOMSECRET",
     resave: false,
     saveUninitialized: true,
     cookie:{
         httpOnly:true,// so that no one can use script and use session id(by default it is already true)
         maxAge:(7 * 24 * 60 * 60 * 1000)// expires in 1 week
-    }
+    },
+    store: MongoStore.create({
+        mongoUrl: dbUrl,
+        touchAfter: 24 * 3600// at least session will remain for 24hr
+
+    })
 }
 
 app.use(session(sessionConfig));
@@ -39,6 +47,7 @@ app.use(flash());
 // initializing middleware for passport
 app.use(passport.session());
 app.use(passport.authenticate('session'));
+
 
 
 // passport.use(new LocalStrategy(
@@ -67,6 +76,8 @@ app.use((req,res,next)=>{
 });
 
 //seedDb();
+
+// ALL THE ROUTES
 const ProductRoutes = require('./routes/product'); // importing default routes of products
 app.use(ProductRoutes);
 const reviewRoutes = require('./routes/review');
@@ -77,7 +88,8 @@ const productapi = require('./routes/api/productapi');
 app.use(productapi);
 const cartRoute = require('./routes/cartRoute');
 app.use(cartRoute);
-
+const paymentroute = require('./routes/payment/razorpay');
+app.use(paymentroute);
 
 app.listen(3000, ()=>{
     console.log("Server running at port 3000");

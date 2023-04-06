@@ -1,6 +1,7 @@
 // as we are creating 1 to many relationship so we are creating new model for review;
 const mongoose = require("mongoose");
 const reviewScehma = mongoose.Schema({
+    name:String,
     rating:{
         type:Number,
         max:5,

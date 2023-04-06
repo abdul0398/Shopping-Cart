@@ -20,5 +20,4 @@ router.post('/user/:id/add',isLoggedin, async (req,res)=>{
     res.redirect('/user/cart');
 })
 
-
 module.exports = router;

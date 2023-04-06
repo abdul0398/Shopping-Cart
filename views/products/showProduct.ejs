@@ -59,11 +59,11 @@
                 <%for(let review of product.reviews){%>
                     <div class="card mb-3">
                         <div class="card-body">
+                            <p><%=review.name%>  <span class="text-muted"><%=review.createdAt.toDateString()%></span></p>
                             <p class="starability-result" data-rating="<%=review.rating%>">
                                 Rated: <%=review.rating%> stars
                             </p>
                             <p class="card-text"><%=review.comment%></p>
-                            <button class="btn btn-danger btn-sm">Delete</button>
                         </div>
                     </div>
                 <%}%>
