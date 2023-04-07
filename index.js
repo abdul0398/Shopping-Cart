@@ -90,7 +90,7 @@ const cartRoute = require('./routes/cartRoute');
 app.use(cartRoute);
 const paymentroute = require('./routes/payment/razorpay');
 app.use(paymentroute);
-
-app.listen(3000, ()=>{
+const port = process.env.PORT || 3000;
+app.listen(port, ()=>{
     console.log("Server running at port 3000");
 })
