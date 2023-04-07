@@ -13,7 +13,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo');// used to store session on mongoDb instead of program storage because it is limited
 const flash = require('connect-flash');// to show the flash messages based on express-session
 
-const dbUrl = process.env.url || "mongodb://127.0.0.1:27017/ecommerce";
+const dbUrl = process.env.URL;
 
 mongoose.connect(dbUrl).then(()=>{
     console.log("Successfully Db started")
