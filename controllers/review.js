@@ -14,7 +14,7 @@ const review = async (req,res)=>{
         res.redirect(`/products/${id}`);// before this line middleware of flash msg runs
     } catch (error) {
         console.log("route");
-        res.render('products/error', {err:error.message});
+        res.render('error', {err:error.message});
     }
 }
 module.exports = review;

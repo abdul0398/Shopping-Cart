@@ -13,11 +13,15 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo');// used to store session on mongoDb instead of program storage because it is limited
 const flash = require('connect-flash');// to show the flash messages based on express-session
 
-const dbUrl = process.env.URL;
 
-mongoose.connect(dbUrl).then(()=>{
+const dbUrl = process.env.URL;
+console.log(dbUrl);
+mongoose.connect("mongodb+srv://abdul77789:Neet2019@cluster0.t6ll3yo.mongodb.net/?retryWrites=true&w=majority").then(()=>{
     console.log("Successfully Db started")
+}).catch(error=>{
+    console.log("Error");
 });
+
 
 app.use(express.urlencoded({extended:true}));
 app.engine('ejs', ejsMate);// changing the default engine used by express to ejs mate for ejs templating
@@ -84,12 +88,14 @@ const reviewRoutes = require('./routes/review');
 app.use(reviewRoutes);
 const userRoutes = require('./routes/auth');
 app.use(userRoutes);
-const productapi = require('./routes/api/productapi');
+const productapi = require('./routes/productapi');
 app.use(productapi);
 const cartRoute = require('./routes/cartRoute');
 app.use(cartRoute);
-const paymentroute = require('./routes/payment/razorpay');
+const paymentroute = require('./routes/razorpay');
 app.use(paymentroute);
+
+
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>{
     console.log("Server running at port 3000");

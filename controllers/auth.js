@@ -1,7 +1,7 @@
 const User = require("../models/user");
 let prevUrl; // to get the previous url from which we are redirected to login for authentication
 module.exports.registerForm = async (req, res) => {
-  res.render("auth/register");
+  res.render("register");
 };
 
 module.exports.registerFormSubmit = async (req, res) => {
@@ -21,12 +21,12 @@ module.exports.registerFormSubmit = async (req, res) => {
     });
   } catch (error) {
     req.flash("error", error.message);
-    res.render("auth/register");
+    res.render("register");
   }
 };
 module.exports.loginForm = async (req, res) => {
   prevUrl = req.session.returnUrl; // to get the previous url from which we are redirected to login for authentication
-  res.render("auth/login");
+  res.render("login");
 };
 module.exports.loginFormSubmit = (req, res) => {
   req.flash("success", `Welcome back ${req.user.name}`);

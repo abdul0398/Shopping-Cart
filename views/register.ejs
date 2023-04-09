@@ -1,0 +1,38 @@
+<%- layout('boilerPlate') %>
+<%- include('flash') %>
+<div class="parent">
+  <div class="w-25 mx-auto">
+    <h1 class="display-6 text-center">Sign Up</h1>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">name</label>
+            <input type="text" class="form-control" name="name" id="username">
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="username" id="exampleInputEmail1">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+        </div>
+        <p>How you wanna Signup?</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" id="buyer" value="buyer" required>
+          <label class="form-check-label" for="flexRadioDefault1">
+            Buyer
+          </label>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="radio" name="role" id="seller" value='seller'>
+          <label class="form-check-label" for="flexRadioDefault2">
+            Seller
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <p>If you are already registered  <a href="/login">Login</a></p> 
+      </form>
+</div>
+
+
+</div>

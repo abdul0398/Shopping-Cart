@@ -38,7 +38,7 @@ module.exports.varifyPayment =  async (req, res) => {
       .update(body.toString())
       .digest("hex");
     if (expectedSignature === req.body.razorpay_signature) {
-      res.redirect("/order/myorders");
+      res.redirect("myorders");
     }
 }
 
@@ -51,5 +51,5 @@ module.exports.myorderPage = async(req, res) => {
             path: 'orderedProducts'
         }
     });
-    res.render('order/myorder',{orders:user.orders});
+    res.render('myorder',{orders:user.orders});
 };

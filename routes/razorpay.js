@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedin } = require("../../validationMiddleware");
-const {createOrderId, varifyPayment, myorderPage} = require('../../controllers/payment');
+const { isLoggedin } = require("../validationMiddleware");
+const {createOrderId, varifyPayment, myorderPage} = require('../controllers/payment');
 
 
 router.get("/payment_gateway/razorpay", isLoggedin,createOrderId);

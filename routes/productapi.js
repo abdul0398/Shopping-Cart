@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {isLoggedin} = require('../../validationMiddleware');
-const User = require('../../models/user');
+const {isLoggedin} = require('../validationMiddleware');
+const User = require('../models/user');
 router.post("/product/:id/like",isLoggedin, async (req, res)=>{
    const {id} = req.params;
    // grab the logged in user

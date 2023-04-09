@@ -6,24 +6,24 @@ module.exports.home = async (req, res) => {
     try {
       res.render("home");
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 
 module.exports.ShowAllProducts =  async (req, res) => {
     try {
       const products = await Product.find();
-      res.render("products/index", { products });
+      res.render("index", { products });
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 
 module.exports.newPrductsForm = async (req, res) => {
     try {
-      res.render("products/newProduct");
+      res.render("newProduct");
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 
@@ -35,7 +35,7 @@ module.exports.newPrductsSubmit = async (req, res) => {
         req.flash("success", "Product added Successfully");
         res.redirect("/products");
       } catch (error) {
-        res.render("products/error", { err: error.message });
+        res.render("error", { err: error.message });
     }
 };
 
@@ -47,18 +47,18 @@ module.exports.showSingleProduct = async (req, res) => {
        if(product.author && req.user && product.author.username == req.user.username){// current user and product author should be same
          isAuthor = true;
        }
-      res.render("products/showProduct", {product: product,reviews: product.reviews, isAuthor:isAuthor});
+      res.render("showProduct", {product: product,reviews: product.reviews, isAuthor:isAuthor});
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 module.exports.productEditForm =  async (req, res) => {
     try {
       const id = req.params.id;
       const product = await Product.findById(id);
-      res.render("products/edit", { product });
+      res.render("edit", { product });
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 
@@ -77,7 +77,7 @@ module.exports.productEditFormSubmit =  async (req, res) => {
       req.flash("sucess", "Edit successfully!");
       res.redirect(`/products/${req.params.id}`);
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
 module.exports.deleteProduct =  async (req, res) => {
@@ -91,6 +91,6 @@ module.exports.deleteProduct =  async (req, res) => {
       req.flash("Error", "Product deleted Successfully");
       res.redirect("/products");
     } catch (error) {
-      res.render("products/error", { err: error.message });
+      res.render("error", { err: error.message });
     }
 };
