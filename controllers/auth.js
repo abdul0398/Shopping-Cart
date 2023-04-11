@@ -3,7 +3,6 @@ let prevUrl; // to get the previous url from which we are redirected to login fo
 module.exports.registerForm = async (req, res) => {
   res.render("register");
 };
-
 module.exports.registerFormSubmit = async (req, res) => {
   try {
     const { username, name, password, role } = req.body;
