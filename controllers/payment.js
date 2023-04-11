@@ -38,7 +38,7 @@ module.exports.varifyPayment =  async (req, res) => {
       .update(body.toString())
       .digest("hex");
     if (expectedSignature === req.body.razorpay_signature) {
-      res.redirect("myorders");
+      res.redirect("/orders/myorders");
     }
 }
 
