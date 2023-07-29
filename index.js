@@ -16,7 +16,7 @@ const flash = require('connect-flash');// to show the flash messages based on ex
 
 const dbUrl = process.env.URL;
 console.log(dbUrl);
-mongoose.connect("mongodb+srv://abdul77789:Neet2019@cluster0.t6ll3yo.mongodb.net/?retryWrites=true&w=majority").then(()=>{
+mongoose.connect(dbUrl).then(()=>{
     console.log("Successfully Db started")
 }).catch(error=>{
     console.log("Error");
